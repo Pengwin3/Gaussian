@@ -18,6 +18,6 @@ int main(void) {
     m.solve();
     std::cout << '\n';
     m.display();
-    // m.back_solve();
+    m.back_solve();
     return 0;
    }
