@@ -30,13 +30,15 @@ void fill()
         // cout << "Enter matrix elements for:\n";
         for ( i; i < m; i++)
         {
-                for ( j =0; j < n; j++)
+                for ( j =0; j < m; j++)
                 {
                         // cout << "[" << i+1 << "] "
                         //      << "[" << j+1 << "]: ";
                         cin >> mat[i][j];
                 }
         }
+        for (i = 0; i < n; i++)
+          cin >> mat[i][n-1];
 }
 
 void display()

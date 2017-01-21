@@ -4,12 +4,11 @@
 using namespace std;
 
 int main(void) {
-    int rows, cols;
+    int rows;
     // cout << "Please input size:\nRows= ";
     cin >> rows;
     // cout << "Cols= ";
-    cin >> cols;
-    matrix m(rows, cols);
+    matrix m(rows, rows+1);
     m.fill();
     m.display();
     std::cout << '\n';
