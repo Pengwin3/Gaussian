@@ -27,13 +27,13 @@ matrix(int row, int col)
 void fill()
 {
         int i=0, j=0;
-        cout << "Enter matrix elements for:\n";
+        // cout << "Enter matrix elements for:\n";
         for ( i; i < m; i++)
         {
                 for ( j =0; j < n; j++)
                 {
-                        cout << "[" << i+1 << "] "
-                             << "[" << j+1 << "]: ";
+                        // cout << "[" << i+1 << "] "
+                        //      << "[" << j+1 << "]: ";
                         cin >> mat[i][j];
                 }
         }
@@ -76,44 +76,46 @@ void solve()
                         q = (mat[j][i]) / (mat[i][i]);
                         for (size_t k = i; k < n; k++) {
 
-                                std::cout << "Term Operated " << mat[j][k]
-                                          << "\nNum           " << q * mat[i][i]
-                                          << "\nDen           " << mat[i][i]
-                                          << "\nFactor        " << q
-                                          << endl << endl;
+                                // Diagnostic
+                                // std::cout << "Term Operated " << mat[j][k]
+                                //           << "\nNum           " << q * mat[i][i]
+                                //           << "\nDen           " << mat[i][i]
+                                //           << "\nFactor        " << q
+                                //           << endl << endl;
 
                                 mat[j][k] = mat[j][k] - (q * mat[i][k]);
 
                         }
                 }
+        }
+        for (size_t i = 0; i < m; i++) {
+                if (mat[i][i] < 1) {
+                        q = mat[i][i];
+                        for (size_t j = i; j < n; ++j) {
+                                mat[i][j] = mat[i][j] / q;
 
-
-                // CURRENTLY BROKEN
-                //
-                //   for (size_t i = m; i > 0; i--) {
-                //     for (size_t j = i-1; j > 0; j--) {
-                //       double p = (mat[j][i]) / (mat[i][i]);
-                //       for (size_t k = i; k > 0; k--) {
-                // mat[j][k] = mat[j][k] - (p * mat[i][k]);
-                //     }
-                //   }
-                // }
+                        }
+                }
         }
 }
 
 void back_solve() {
 
-        double q = 0.0, Sol_Mat;
-        for (int k = m-1; k >=0; k--) {
-                for (size_t i = k-1; i < n; i++) {
-                        q += mat[k][i] * mat[i][n];
+        double p = 0.0, Sol_Mat[n-1];
+        for (int k = m-1; k >= 0; --k) {
+                if (k == m-1) {
+                        Sol_Mat[k] = mat[k][n-1] / mat[k][k];
                 }
-                Sol_Mat = mat[k][n-1] /* -q */;
-                // cout << mat[m-1][n-1] << '\n';
-                q = 0;
+                else {
+                        for (size_t i = k+1; i < m; i++) {
+                                p += mat[k][i] * Sol_Mat[i];
+                        }
+                        Sol_Mat[k] = (mat[k][n-1] - p) / mat[k][k];
+                        p = 0.0;
+                }
         }
         cout << "Solution:\n";
-        for (int i = 0; i < m-1; i++)
-                cout << Sol_Mat << endl;
+        for (size_t i = 0; i < m; i++)
+                cout << "X" << i << "= " << Sol_Mat[i] << endl;
 }
 };
