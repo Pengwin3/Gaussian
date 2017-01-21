@@ -38,21 +38,34 @@ void fill()
                 }
         }
         for (i = 0; i < n; i++)
-          cin >> mat[i][n-1];
+                cin >> mat[i][n-1];
 }
 
 void display()
 {
-        cout << "The matrix is:";
+        cout << "The matrix is: \n";
         for (int i = 0; i < m; i++)
         {
-                cout << endl;
                 for (int j = 0; j < n; j++)
                 {
-                        cout << setw(8) << mat[i][j];
+                    formatTable(i,j);
+                    cout << setw(8) << mat[i][j];
                 }
+
+                cout << endl;
         }
         cout << endl;
+}
+
+void formatTable(int i, int j) {
+  if (i==0 & j==0)
+    cout << "「";
+  if (i==0 && j==n-1)
+    cout << "˥ ";
+  if (i==m-1 && j==n-1)
+    cout << "」";
+  if (i==m-1 && j==0)
+    cout << " ˪";
 }
 
 void pivotize() {
