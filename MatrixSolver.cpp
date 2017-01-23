@@ -19,5 +19,6 @@ int main(void) {
     // m.display();
     m.back_solve();
     // m.display();
+    m.errorCheck();
     return 0;
    }
