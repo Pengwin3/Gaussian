@@ -1,6 +1,7 @@
 #include <iostream>
 #include <iomanip>
 #include <array>
+#include <cmath>
 
 using namespace std;
 
@@ -8,7 +9,7 @@ class matrix
 {
 private:
 int m, n;
-double **mat;
+double **mat, *Sol_Mat;
 public:
 
 matrix(int row, int col)
@@ -16,6 +17,7 @@ matrix(int row, int col)
         m = row;
         n = col;
         mat = new (double *);
+        Sol_Mat = new (double);
         m;
         for (int i = 0; i < m; i++)
                 mat[i] = new double[n];
@@ -116,7 +118,7 @@ void solve()
 
 void back_solve() {
 
-        double p = 0.0, Sol_Mat[n-1];
+        double p = 0.0;
         for (int k = m-1; k >= 0; --k) {
                 if (k == m-1) {
                         Sol_Mat[k] = mat[k][n-1] / mat[k][k];
@@ -132,5 +134,10 @@ void back_solve() {
         cout << "Solution:\n";
         for (size_t i = 0; i < m; i++)
                 cout << "X" << i << "= " << Sol_Mat[i] << endl;
+}
+
+void errorCheck()
+{
+  // abs();
 }
 };
