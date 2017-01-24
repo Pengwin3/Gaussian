@@ -1,3 +1,3 @@
 #!/bin/bash
 make
-./MatrixSolver < input.txt
+./MatrixSolver < data.txt
