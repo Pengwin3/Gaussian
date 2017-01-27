@@ -1,6 +1,5 @@
 #include <iostream>
 #include <iomanip>
-#include <array>
 #include <cmath>
 
 using namespace std;
@@ -16,7 +15,7 @@ double **mat,
 *LHS;
 
 public:
-
+// Constructor
 matrix(int row, int col)
 {
         m = row;
@@ -32,7 +31,7 @@ matrix(int row, int col)
                 Original_Mat[i] = new double[n];
         }
 }
-
+// Destructor
 ~matrix(){
 }
 
@@ -46,6 +45,8 @@ void fill()
 
         for ( i = 0; i < n; i++)
                 cin >> mat[i][n-1];
+
+        // Deep copy initial matrix to use for solution later
 
         for ( i = 0; i < m; i++)
                 for ( j = 0; j < n; j++)
@@ -71,6 +72,7 @@ void display()
         cout << endl;
 }
 
+// Aesthetic matrix formatting function
 void formatTable(int i, int j) {
         if (i==0 & j==0)
                 cout << "「";
@@ -82,6 +84,8 @@ void formatTable(int i, int j) {
                 cout << " ˪";
 }
 
+// Not neccessary in diagonally dominant matrices,
+// included for future use.
 void pivotize() {
 
         double *temp;
@@ -94,6 +98,8 @@ void pivotize() {
                                 mat[i] = temp;
                         }
 }
+
+// Main matrix solving function
 void solve()
 {
         double q;
@@ -113,7 +119,6 @@ void solve()
                                 mat[i][j] = mat[i][j] / q;
                 }
 }
-
 
 void back_solve() {
 
@@ -135,6 +140,8 @@ void back_solve() {
                 cout << "X" << i << " = " << Sol_Mat[i] << endl;
 }
 
+// Compares the Found "x" times "A" to the known "b"
+// then computes average error.
 void errorCheck()
 {
         double q;
@@ -147,15 +154,15 @@ void errorCheck()
                 RHS[i] = q;
         }
         cout << endl
-             << "Calculated Solutions"
+             << "Calculated b using X:"
              << endl;
         for (size_t i = 0; i < n-1; i++)
                 cout << RHS[i] << endl;
-
+        cout << endl;
         q = 0.0;
         for ( int i = 0; i < n-1; i++)
                 q += (LHS[i]-RHS[i]) * (LHS[i]-RHS[i]);
-                
-        cout << sqrt(q) / n;
+
+        cout << "Average Error: " << sqrt(q) / n << endl;
 }
 };
